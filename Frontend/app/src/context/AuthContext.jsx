@@ -1,7 +1,6 @@
+import { createContext } from "react";
 import { useContext } from "react";
 import { useState } from "react";
-
-const { createContext } = require("react");
 
 const Authcontext = createContext();
 
