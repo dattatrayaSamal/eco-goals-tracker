@@ -1,7 +1,9 @@
-const habitSchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  title: String,
-  frequency: String,
-  streaks: [{ date: Date }],
+const mongoose = require("mongoose");
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: { type: String, unique: true },
+  password: String,
 });
-module.exports = mongoose.model("Habit", habitSchema);
+
+module.exports = mongoose.model("User", userSchema);
