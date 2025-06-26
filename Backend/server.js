@@ -15,7 +15,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use("/api/auth", authRoutes);
-app.use("/api/habit", habitRoutes);
+app.use("/api/habits", habitRoutes);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`server is running on port ${PORT}`));

@@ -1,36 +1,35 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import React from "react";
 import "./App.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { useAuth } from "./context/AuthContext";
-import Home from "./pages/Home";
-
-function ProtectedRoute({ children }) {
-  const user = useAuth();
-  return user ? children : <Navigate to="/login" />;
-}
+import { AuthContext, AuthProvider } from "./context/AuthContext";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <RoutesWrapper />
+      </BrowserRouter>
+    </AuthProvider>
+  );
+}
+
+function RoutesWrapper() {
+  const { user } = React.useContext(AuthContext);
+  return (
+    <Routes>
+      <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
+      <Route
+        path="/register"
+        element={!user ? <Register /> : <Navigate to="/" />}
+      />
+      <Route
+        path="/"
+        element={user ? <Dashboard /> : <Navigate to="/login" />}
+      />
+    </Routes>
   );
 }
 
