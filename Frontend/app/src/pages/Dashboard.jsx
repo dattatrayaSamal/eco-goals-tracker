@@ -31,11 +31,11 @@ export default function Dashboard() {
   const handleAddHabit = async (newHabit) => {
     try {
       const res = await api.post("/habits", newHabit);
-      setHabits((prev) => [...prev, res.data]); // Optimistic update
+      setHabits((prev) => [...prev, res.data]);
     } catch (err) {
       console.error("Failed to add habit:", err);
-      fetchHabits(); // Fallback to refetch if optimistic update fails
-      throw err; // Re-throw to let HabitForm handle the error
+      fetchHabits();
+      throw err;
     }
   };
 

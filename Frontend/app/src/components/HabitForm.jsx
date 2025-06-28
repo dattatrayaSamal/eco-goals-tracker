@@ -64,7 +64,7 @@ export default function HabitForm({ onAdd }) {
           loading ? "bg-green-300" : "bg-green-600 hover:bg-green-700"
         }`}
       >
-        {loading ? "Adding..." : "Add Eco-Habit"}
+        {loading ? "Adding..." : "Add Habit"}
       </button>
     </form>
   );
